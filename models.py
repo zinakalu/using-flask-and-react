@@ -42,3 +42,25 @@ class User(db.Model):
 
     def __repr__(self):
         return f"<User {self.username}>"
+
+    def save(self):
+        db.session.add(self)
+        db.session.commit()
+
+    def delete(self):
+        db.session.delete(self)
+        db.session.commit()
+
+    def update(self, title, description):
+        self.title=title
+        self.description=description
+
+        db.session.commit()
+
+    def to_dict(self):
+        return {
+            'id':self.id,
+            'username': self.username,
+            'email': self.email,
+            'password':self.password
+        }
